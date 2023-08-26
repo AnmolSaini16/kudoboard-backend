@@ -47,6 +47,7 @@ export const loginUser = async (req, res) => {
         expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24),
         sameSite: "none",
         secure: true,
+        domain: "https://kudoboard.vercel.app/",
       })
       .status(200)
       .json({ user: user, token: token });
