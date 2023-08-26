@@ -30,7 +30,6 @@ app.use(function (req, res, next) {
   );
   next();
 });
-
 app.use(json());
 app.use(cors(corsOptions));
 app.use(cookieParser());
