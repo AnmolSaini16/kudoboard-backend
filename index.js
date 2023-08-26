@@ -16,6 +16,15 @@ const corsOptions = {
   allowedOrigins: ["http://localhost:3000", "https://kudoboard.vercel.app/"],
 };
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 //middlewares
 app.use(json());
 app.use(cors(corsOptions));
