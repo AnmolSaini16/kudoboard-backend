@@ -44,6 +44,7 @@ export const loginUser = async (req, res) => {
     res
       .cookie("access_token", token, {
         httpOnly: true,
+        expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24),
         sameSite: "none",
         secure: true,
       })
