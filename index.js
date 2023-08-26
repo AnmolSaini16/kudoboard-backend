@@ -13,6 +13,7 @@ const app = express();
 const corsOptions = {
   origin: true, //included origin as true
   credentials: true, //included credentials as true
+  allowedOrigins: ["http://localhost:3000", "https://kudoboard.vercel.app/"],
 };
 
 //middlewares
