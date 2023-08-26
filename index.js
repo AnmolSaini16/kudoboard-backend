@@ -17,6 +17,7 @@ const corsOptions = {
     "https://kudoboard-api.onrender.com",
   ],
   credentials: true,
+  exposedHeaders: ["set-cookie"],
 };
 
 //middlewares
