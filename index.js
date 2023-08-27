@@ -21,7 +21,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/board", boardRoutes);
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("App is Listening");
 });
 
 const connect = async () => {
