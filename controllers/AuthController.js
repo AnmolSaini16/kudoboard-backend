@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../modules/user.module.js";
+import { getToken } from "../utils/verifyToken.js";
 
 export const registerUser = async (req, res) => {
   try {
@@ -25,7 +26,7 @@ export const loginUser = async (req, res) => {
       email: req.body.email,
     });
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(200).json({ error: "User not found" });
     }
     const isPasswordCorrect = await bcrypt.compare(
       req.body.password,
@@ -33,7 +34,7 @@ export const loginUser = async (req, res) => {
     );
 
     if (!isPasswordCorrect)
-      return res.status(404).json({ error: "Wrong password" });
+      return res.status(200).json({ error: "Wrong password" });
 
     // Valid User
     const token = jwt.sign(
@@ -41,16 +42,7 @@ export const loginUser = async (req, res) => {
       process.env.JWT
     );
 
-    res
-      .cookie("access_token", token, {
-        httpOnly: true,
-        expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24),
-        sameSite: "none",
-        secure: true,
-        domain: "https://kudoboard.vercel.app/",
-      })
-      .status(200)
-      .json({ user: user, token: token });
+    res.status(200).json({ user: user, token: token });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: err });
@@ -58,6 +50,7 @@ export const loginUser = async (req, res) => {
 };
 
 export const logoutUser = async (req, res) => {
+  // Change
   try {
     res.clearCookie("access_token");
     res.status(200).json({ status: "success" });
@@ -69,7 +62,7 @@ export const logoutUser = async (req, res) => {
 
 export const getCurrentUser = async (req, res) => {
   try {
-    const { access_token } = req.cookies;
+    const access_token = getToken(req);
     const decodedToken = jwt.decode(access_token);
     if (decodedToken) {
       const loggedInuser = await User.findById({ _id: decodedToken.id });

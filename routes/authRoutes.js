@@ -14,7 +14,7 @@ router.post("/register", registerUser);
 
 router.post("/login", loginUser);
 
-router.post("/logout", verifyToken, logoutUser);
+// router.post("/logout", verifyToken, logoutUser);
 
 router.get("/getCurrentUser", verifyToken, getCurrentUser);
 

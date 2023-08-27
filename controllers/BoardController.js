@@ -1,6 +1,7 @@
 import Board from "../modules/board.module.js";
 import User from "../modules/user.module.js";
 import jwt from "jsonwebtoken";
+import { getToken } from "../utils/verifyToken.js";
 
 export const createBoard = async (req, res) => {
   try {
@@ -48,7 +49,7 @@ export const getBoard = async (req, res) => {
 
 export const getAllBoards = async (req, res) => {
   try {
-    const { access_token } = req.cookies;
+    const access_token = getToken(req);
     const decodedToken = jwt.decode(access_token);
     const user = await User.findById(decodedToken.id);
     if (user) {
