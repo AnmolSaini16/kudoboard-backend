@@ -6,16 +6,12 @@ import cors from "cors";
 
 import authRoutes from "./routes/authRoutes.js";
 import boardRoutes from "./routes/boardRoutes.js";
+import { corsOptions } from "./utils/corsOptions.js";
 
 dotenv.config();
 const app = express();
 
-const corsOptions = {
-  origin: ["http://localhost:3000", "https://kudoboard-api.onrender.com"],
-};
-
 //middlewares
-app.use(json());
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
