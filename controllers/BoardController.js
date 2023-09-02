@@ -171,3 +171,23 @@ export const deleteCard = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+export const editDisplayName = async (req, res) => {
+  try {
+    const { boardId, displayName } = req.body;
+    if (!displayName || !boardId) return;
+    const updatedBoard = await Board.findOneAndUpdate(
+      { boardId: boardId },
+      {
+        $set: { displayName: displayName },
+      },
+      { new: true }
+    );
+    if (updatedBoard) {
+      res.status(200).json({ status: "Board Title Edited" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};

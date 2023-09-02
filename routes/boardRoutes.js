@@ -5,6 +5,7 @@ import {
   deleteBoard,
   deleteCard,
   editCard,
+  editDisplayName,
   getAllBoards,
   getBoard,
 } from "../controllers/BoardController.js";
@@ -14,6 +15,8 @@ const router = express.Router();
 
 // Boards
 router.post("/createBoard", verifyToken, createBoard);
+
+router.post("/editDisplayName", editDisplayName);
 
 router.get("/:id", getBoard);
 
