@@ -16,7 +16,7 @@ const router = express.Router();
 // Boards
 router.post("/createBoard", verifyToken, createBoard);
 
-router.post("/editDisplayName", editDisplayName);
+router.post("/editDisplayName", verifyToken, editDisplayName);
 
 router.get("/:id", getBoard);
 
